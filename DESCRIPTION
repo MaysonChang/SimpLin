@@ -1,0 +1,18 @@
+Package: SimpLin
+Type: Package
+Title: Simple Linear Regression via RcppArmadillo
+Version: 0.1.0
+Authors@R: person(given = "Mayson", family = "Zhang", email = "mayson.zhang18@gmail.com", role = c("aut","cre"))
+Maintainer: Mayson Zhang <mayson.zhang18@gmail.com>
+Description: Provides a fast simple linear regression (y ~ x) with estimates, standard errors,
+    95% confidence intervals, residuals, and fitted values, implemented in C++ via Rcpp
+    and RcppArmadillo. Includes an R wrapper with validation and a vignette.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Depends: R (>= 4.1)
+Imports: Rcpp
+LinkingTo: Rcpp, RcppArmadillo
+Suggests: knitr, rmarkdown, ggplot2
+VignetteBuilder: knitr
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.3

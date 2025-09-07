@@ -1,0 +1,54 @@
+---
+title: "SimpLin: Simple Linear Regression via Rcpp"
+output:
+  html_document:
+    toc: true
+    number_sections: true
+  pdf_document: default
+vignette: >
+  %\VignetteIndexEntry{SimpLin: Simple Linear Regression via Rcpp}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+```
+
+## Quick Start
+
+```{r}
+library(SimpLin)
+library(ggplot2)
+set.seed(100)
+n <- 200
+x <- rnorm(n); y <- 1 + 2*x + rnorm(n)
+fit <- SimpLinR(x, y)
+str(fit, max.level = 1)
+
+# quick sanity check
+df <- data.frame(x, y, pred = fit$predicted, resid = fit$residuals)
+```
+
+## Graphics
+
+# Figure 1: Scatter + fitted line
+```{r}
+ggplot(df, aes(x, y)) +
+  geom_point(alpha = 0.6) +
+  geom_abline(intercept = fit$beta0_hat, slope = fit$beta1_hat, linewidth = 1) +
+  labs(title = "SimpLin — Data with Fitted Regression Line",
+       x = "Predictor (x)", y = "Response (y)",
+       caption = "Coefficients computed in C++") +
+  theme_minimal()
+```
+
+# Figure 2: Residuals vs Predicted Values
+```{r}
+ggplot(df, aes(pred, resid)) +
+  geom_hline(yintercept = 0) +
+  geom_point(alpha = 0.6) +
+  labs(title = "SimpLin — Residuals vs Fitted",
+       x = "Predicted values", y = "Residuals") +
+  theme_minimal()
+```
